@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using ProfessorManagement.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ProfessorContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
