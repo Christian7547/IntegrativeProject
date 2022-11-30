@@ -22,18 +22,18 @@ namespace ProfessorManagement.Controllers
         // GET: Professors
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Products.ToListAsync());
+              return View(await _context.Professors.ToListAsync());
         }
 
         // GET: Professors/Details/5
         public async Task<IActionResult> Details(byte? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Professors == null)
             {
                 return NotFound();
             }
 
-            var professor = await _context.Products
+            var professor = await _context.Professors
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (professor == null)
             {
@@ -68,12 +68,12 @@ namespace ProfessorManagement.Controllers
         // GET: Professors/Edit/5
         public async Task<IActionResult> Edit(byte? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Professors == null)
             {
                 return NotFound();
             }
 
-            var professor = await _context.Products.FindAsync(id);
+            var professor = await _context.Professors.FindAsync(id);
             if (professor == null)
             {
                 return NotFound();
@@ -119,12 +119,12 @@ namespace ProfessorManagement.Controllers
         // GET: Professors/Delete/5
         public async Task<IActionResult> Delete(byte? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Professors == null)
             {
                 return NotFound();
             }
 
-            var professor = await _context.Products
+            var professor = await _context.Professors
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (professor == null)
             {
@@ -139,14 +139,14 @@ namespace ProfessorManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(byte id)
         {
-            if (_context.Products == null)
+            if (_context.Professors == null)
             {
-                return Problem("Entity set 'ProfessorContext.Products'  is null.");
+                return Problem("Entity set 'ProfessorContext.Professors'  is null.");
             }
-            var professor = await _context.Products.FindAsync(id);
+            var professor = await _context.Professors.FindAsync(id);
             if (professor != null)
             {
-                _context.Products.Remove(professor);
+                _context.Professors.Remove(professor);
             }
             
             await _context.SaveChangesAsync();
@@ -155,7 +155,7 @@ namespace ProfessorManagement.Controllers
 
         private bool ProfessorExists(byte id)
         {
-          return _context.Products.Any(e => e.Id == id);
+          return _context.Professors.Any(e => e.Id == id);
         }
     }
 }
