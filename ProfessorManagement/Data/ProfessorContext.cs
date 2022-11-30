@@ -10,5 +10,13 @@ namespace ProfessorManagement.Data
 
         }
         public DbSet<Professor> Professors { get; set; }
+        public DbSet<Request> Requests { get; set; }  
+        public DbSet<ProfessorRequest> ProfessorsRequests { get; set; } 
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Professor_Subject> Professors_Subjects { get; set; }
+        public DbSet<Professor_Grade> Professor_Grades { get; set; }
+        public DbSet<AcademicPeriod> AcademicPeriods { get; set; }  
+        public DbSet<AcademicDesignation> AcademicDesignations { get; set; }
     }
 }

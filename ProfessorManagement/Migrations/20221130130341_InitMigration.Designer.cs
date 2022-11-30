@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProfessorManagement.Data;
 
@@ -11,9 +12,10 @@ using ProfessorManagement.Data;
 namespace ProfessorManagement.Migrations
 {
     [DbContext(typeof(ProfessorContext))]
-    partial class ProfessorContextModelSnapshot : ModelSnapshot
+    [Migration("20221130130341_InitMigration")]
+    partial class InitMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

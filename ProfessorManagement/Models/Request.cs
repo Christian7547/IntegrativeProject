@@ -20,6 +20,6 @@ namespace ProfessorManagement.Models
         [Required(ErrorMessage = "Grade experience is required")]
         [StringLength(35, ErrorMessage = "{0} must be: minimun {2} and maximun {1}", MinimumLength = 3)]
         [Display(Name = "Grade experience")]
-        public string Experience { get; set; }  
+        public string Experience { get; set; }
     }
 }
