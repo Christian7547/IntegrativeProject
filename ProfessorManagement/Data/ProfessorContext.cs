@@ -9,7 +9,6 @@ namespace ProfessorManagement.Data
         {
 
         }
-
         public DbSet<Professor> Products { get; set; }
     }
 }
