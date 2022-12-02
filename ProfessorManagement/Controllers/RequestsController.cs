@@ -54,7 +54,7 @@ namespace ProfessorManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Gestion,Degree,Experience")] Request request)
+        public async Task<IActionResult> Create([Bind("Id,Gestion,Degree,Comment")] Request request)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace ProfessorManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Gestion,Degree,Experience")] Request request)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Gestion,Degree,Comment")] Request request)
         {
             if (id != request.Id)
             {
