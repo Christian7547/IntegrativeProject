@@ -65,11 +65,23 @@ namespace ProfessorManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Gestion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Degree = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Experience = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false)
+                    Comment = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Requests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<byte>(type: "tinyint", nullable: false),
+                    RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,6 +179,27 @@ namespace ProfessorManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    RoleID = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Professors_Subjects",
                 columns: table => new
                 {
@@ -231,6 +264,11 @@ namespace ProfessorManagement.Migrations
                 name: "IX_ProfessorsRequests_RequestId",
                 table: "ProfessorsRequests",
                 column: "RequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleID",
+                table: "Users",
+                column: "RoleID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -248,6 +286,9 @@ namespace ProfessorManagement.Migrations
                 name: "ProfessorsRequests");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "AcademicPeriods");
 
             migrationBuilder.DropTable(
@@ -261,6 +302,9 @@ namespace ProfessorManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Requests");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }
