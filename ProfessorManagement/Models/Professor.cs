@@ -18,7 +18,6 @@ namespace ProfessorManagement.Models
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "SecondLastName is required")]
         [StringLength(50, ErrorMessage = "{0} must be: minimum {2} and maximum {1}", MinimumLength = 3)]
         [Display(Name = "SecondLastName")]
         public string? SecondLastName { get; set; }
