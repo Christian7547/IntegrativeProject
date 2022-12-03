@@ -26,7 +26,7 @@ namespace ProfessorManagement.Controllers
         }
 
         // GET: Professors/Details/5
-        public async Task<IActionResult> Details(byte? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Professors == null)
             {
@@ -56,6 +56,9 @@ namespace ProfessorManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,LastName,SecondLastName,CI,BirthDate,Phone,Address,RegisterDate,RegisterType,Status")] Professor professor)
         {
+            professor.RegisterDate = DateTime.Today;
+            professor.RegisterType = 1;
+            professor.Status = 1;
             if (ModelState.IsValid)
             {
                 _context.Add(professor);
@@ -66,7 +69,7 @@ namespace ProfessorManagement.Controllers
         }
 
         // GET: Professors/Edit/5
-        public async Task<IActionResult> Edit(byte? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Professors == null)
             {
@@ -86,7 +89,7 @@ namespace ProfessorManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(byte id, [Bind("Id,Name,LastName,SecondLastName,CI,BirthDate,Phone,Address,RegisterDate,RegisterType,Status")] Professor professor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,SecondLastName,CI,BirthDate,Phone,Address,RegisterDate,RegisterType,Status")] Professor professor)
         {
             if (id != professor.Id)
             {
@@ -117,7 +120,7 @@ namespace ProfessorManagement.Controllers
         }
 
         // GET: Professors/Delete/5
-        public async Task<IActionResult> Delete(byte? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Professors == null)
             {
@@ -137,7 +140,7 @@ namespace ProfessorManagement.Controllers
         // POST: Professors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(byte id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Professors == null)
             {
@@ -153,7 +156,7 @@ namespace ProfessorManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProfessorExists(byte id)
+        private bool ProfessorExists(int id)
         {
           return _context.Professors.Any(e => e.Id == id);
         }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProfessorManagement.Migrations
 {
-    public partial class migration : Migration
+    public partial class DefaultMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,8 @@ namespace ProfessorManagement.Migrations
                 name: "Grades",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(type: "tinyint", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -40,13 +41,14 @@ namespace ProfessorManagement.Migrations
                 name: "Professors",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(type: "tinyint", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     SecondLastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CI = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    Phone = table.Column<int>(type: "int", maxLength: 12, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RegisterType = table.Column<byte>(type: "tinyint", nullable: false),
@@ -76,7 +78,8 @@ namespace ProfessorManagement.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(type: "tinyint", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -88,7 +91,8 @@ namespace ProfessorManagement.Migrations
                 name: "Subjects",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(type: "tinyint", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Area = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
@@ -103,7 +107,7 @@ namespace ProfessorManagement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfessorId = table.Column<byte>(type: "tinyint", nullable: false),
+                    ProfessorId = table.Column<int>(type: "int", nullable: false),
                     AcademicPeriodId = table.Column<int>(type: "int", nullable: false),
                     DesignationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -130,8 +134,8 @@ namespace ProfessorManagement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfessorId = table.Column<byte>(type: "tinyint", nullable: false),
-                    GradeId = table.Column<byte>(type: "tinyint", nullable: false)
+                    ProfessorId = table.Column<int>(type: "int", nullable: false),
+                    GradeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,7 +162,7 @@ namespace ProfessorManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ChangeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NewStatus = table.Column<byte>(type: "tinyint", nullable: false),
-                    ProfessorId = table.Column<byte>(type: "tinyint", nullable: false),
+                    ProfessorId = table.Column<int>(type: "int", nullable: false),
                     RequestId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -186,7 +190,7 @@ namespace ProfessorManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    RoleID = table.Column<byte>(type: "tinyint", nullable: false)
+                    RoleID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,8 +209,8 @@ namespace ProfessorManagement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfessorId = table.Column<byte>(type: "tinyint", nullable: false),
-                    SubjectId = table.Column<byte>(type: "tinyint", nullable: false)
+                    ProfessorId = table.Column<int>(type: "int", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

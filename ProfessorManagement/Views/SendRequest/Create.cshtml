@@ -1,0 +1,79 @@
+﻿@model ProfessorManagement.Models.SendRequest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>New request</h1>
+
+<h4>Request</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Send" asp-controller="SendRequest" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NamesProfessor" class="control-label"></label> 
+                <input asp-for="NamesProfessor" class="form-control" />
+                <span asp-validation-for="NamesProfessor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastNameProfessor" class="control-label"></label>
+                <input asp-for="LastNameProfessor" class="form-control" />
+                <span asp-validation-for="LastNameProfessor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondLastNameProfessor" class="control-label"></label>
+                <input asp-for="SecondLastNameProfessor" class="form-control" />
+                <span asp-validation-for="SecondLastNameProfessor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CIProfessor" class="control-label"></label>
+                <input asp-for="CIProfessor" class="form-control" />
+                <span asp-validation-for="CIProfessor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDateProfessor" class="control-label"></label>
+                <input asp-for="BirthDateProfessor" class="form-control" type="date" />
+                <span asp-validation-for="BirthDateProfessor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneProfessor" class="control-label"></label>
+                <input asp-for="PhoneProfessor" class="form-control" />
+                <span asp-validation-for="PhoneProfessor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AddressProfessor" class="control-label"></label>
+                <input asp-for="AddressProfessor" class="form-control" />
+                <span asp-validation-for="AddressProfessor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ForWhatGestion" class="control-label"></label>
+                <input asp-for="ForWhatGestion" class="form-control" />
+                <span asp-validation-for="ForWhatGestion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Degree" class="control-label"></label>
+                <input asp-for="Degree" class="form-control" />
+                <span asp-validation-for="Degree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

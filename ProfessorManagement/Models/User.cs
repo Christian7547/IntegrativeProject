@@ -17,7 +17,7 @@ namespace ProfessorManagement.Models
         [Display(Name = "Password")]
         public string Password { get; set; }  
         
-        public byte RoleID { get; set; }
+        public int RoleID { get; set; }
         public Role? role { get; set; }  
     }
 }

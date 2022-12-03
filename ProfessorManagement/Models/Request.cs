@@ -8,7 +8,7 @@ namespace ProfessorManagement.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Gestion is required")]
-        [StringLength(50, ErrorMessage = "{0} must be: minimun {2} and maximun {1}", MinimumLength = 3)] //StringLength(LargoMáximo, mensajeErros, LargoMinimo)
+        [StringLength(50, ErrorMessage = "{0} must be: minimun {2} and maximun {1}", MinimumLength = 3)]
         [Display(Name = "Gestion")]
         public string Gestion { get; set; } //gestion para la que está postulando
 

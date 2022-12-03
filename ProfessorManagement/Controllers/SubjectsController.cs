@@ -26,7 +26,7 @@ namespace ProfessorManagement.Controllers
         }
 
         // GET: Subjects/Details/5
-        public async Task<IActionResult> Details(byte? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Subjects == null)
             {
@@ -66,7 +66,7 @@ namespace ProfessorManagement.Controllers
         }
 
         // GET: Subjects/Edit/5
-        public async Task<IActionResult> Edit(byte? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Subjects == null)
             {
@@ -86,7 +86,7 @@ namespace ProfessorManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(byte id, [Bind("Id,Name,Area")] Subject subject)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Area")] Subject subject)
         {
             if (id != subject.Id)
             {
@@ -117,7 +117,7 @@ namespace ProfessorManagement.Controllers
         }
 
         // GET: Subjects/Delete/5
-        public async Task<IActionResult> Delete(byte? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Subjects == null)
             {
@@ -137,7 +137,7 @@ namespace ProfessorManagement.Controllers
         // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(byte id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Subjects == null)
             {
@@ -153,7 +153,7 @@ namespace ProfessorManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SubjectExists(byte id)
+        private bool SubjectExists(int id)
         {
           return _context.Subjects.Any(e => e.Id == id);
         }

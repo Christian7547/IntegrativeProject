@@ -36,8 +36,8 @@ namespace ProfessorManagement.Migrations
                     b.Property<DateTime>("DesignationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte>("ProfessorId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("ProfessorId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -74,8 +74,11 @@ namespace ProfessorManagement.Migrations
 
             modelBuilder.Entity("ProfessorManagement.Models.Grade", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -89,8 +92,11 @@ namespace ProfessorManagement.Migrations
 
             modelBuilder.Entity("ProfessorManagement.Models.Professor", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -115,10 +121,9 @@ namespace ProfessorManagement.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
+                    b.Property<int>("Phone")
                         .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -147,11 +152,11 @@ namespace ProfessorManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<byte>("GradeId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
 
-                    b.Property<byte>("ProfessorId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("ProfessorId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -162,30 +167,7 @@ namespace ProfessorManagement.Migrations
                     b.ToTable("Professor_Grades");
                 });
 
-            modelBuilder.Entity("ProfessorManagement.Models.Professor_Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<byte>("ProfessorId")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("SubjectId")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfessorId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Professors_Subjects");
-                });
-
-            modelBuilder.Entity("ProfessorManagement.Models.ProfessorRequest", b =>
+            modelBuilder.Entity("ProfessorManagement.Models.Professor_Request", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,8 +181,8 @@ namespace ProfessorManagement.Migrations
                     b.Property<byte>("NewStatus")
                         .HasColumnType("tinyint");
 
-                    b.Property<byte>("ProfessorId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("ProfessorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
@@ -212,6 +194,29 @@ namespace ProfessorManagement.Migrations
                     b.HasIndex("RequestId");
 
                     b.ToTable("ProfessorsRequests");
+                });
+
+            modelBuilder.Entity("ProfessorManagement.Models.Professor_Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProfessorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfessorId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Professors_Subjects");
                 });
 
             modelBuilder.Entity("ProfessorManagement.Models.Request", b =>
@@ -244,8 +249,11 @@ namespace ProfessorManagement.Migrations
 
             modelBuilder.Entity("ProfessorManagement.Models.Role", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("RoleName")
                         .IsRequired()
@@ -259,8 +267,11 @@ namespace ProfessorManagement.Migrations
 
             modelBuilder.Entity("ProfessorManagement.Models.Subject", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Area")
                         .IsRequired()
@@ -290,8 +301,8 @@ namespace ProfessorManagement.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte>("RoleID")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -343,6 +354,25 @@ namespace ProfessorManagement.Migrations
                     b.Navigation("professor");
                 });
 
+            modelBuilder.Entity("ProfessorManagement.Models.Professor_Request", b =>
+                {
+                    b.HasOne("ProfessorManagement.Models.Professor", "Professor")
+                        .WithMany()
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProfessorManagement.Models.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Professor");
+
+                    b.Navigation("Request");
+                });
+
             modelBuilder.Entity("ProfessorManagement.Models.Professor_Subject", b =>
                 {
                     b.HasOne("ProfessorManagement.Models.Professor", "professor")
@@ -360,25 +390,6 @@ namespace ProfessorManagement.Migrations
                     b.Navigation("professor");
 
                     b.Navigation("subject");
-                });
-
-            modelBuilder.Entity("ProfessorManagement.Models.ProfessorRequest", b =>
-                {
-                    b.HasOne("ProfessorManagement.Models.Professor", "Professor")
-                        .WithMany()
-                        .HasForeignKey("ProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProfessorManagement.Models.Request", "Request")
-                        .WithMany()
-                        .HasForeignKey("RequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Professor");
-
-                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("ProfessorManagement.Models.User", b =>

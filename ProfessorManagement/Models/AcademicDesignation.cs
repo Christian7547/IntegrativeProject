@@ -7,7 +7,7 @@ namespace ProfessorManagement.Models
         [Key]
         public int Id { get; set; } 
 
-        public byte ProfessorId { get; set; }
+        public int ProfessorId { get; set; }
 
         public int AcademicPeriodId { get; set; }
 
