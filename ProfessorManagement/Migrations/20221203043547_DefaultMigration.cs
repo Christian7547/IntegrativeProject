@@ -45,10 +45,10 @@ namespace ProfessorManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SecondLastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SecondLastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CI = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Phone = table.Column<int>(type: "int", maxLength: 12, nullable: false),
+                    Phone = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RegisterType = table.Column<byte>(type: "tinyint", nullable: false),
@@ -67,7 +67,7 @@ namespace ProfessorManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Gestion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Degree = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                    Comment = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -122,7 +122,6 @@ namespace ProfessorManagement.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Phone")
-                        .HasMaxLength(12)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RegisterDate")
@@ -132,7 +131,6 @@ namespace ProfessorManagement.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("SecondLastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -228,9 +226,8 @@ namespace ProfessorManagement.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Degree")
                         .IsRequired()
