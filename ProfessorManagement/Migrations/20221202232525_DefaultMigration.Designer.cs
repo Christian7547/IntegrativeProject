@@ -12,8 +12,13 @@ using ProfessorManagement.Data;
 namespace ProfessorManagement.Migrations
 {
     [DbContext(typeof(ProfessorContext))]
+<<<<<<<< HEAD:ProfessorManagement/Migrations/20221202232525_DefaultMigration.Designer.cs
     [Migration("20221202232525_DefaultMigration")]
     partial class DefaultMigration
+========
+    [Migration("20221202012059_migration")]
+    partial class migration
+>>>>>>>> dd8f3a375ab4f01076160aabd73a063735c49aa4:ProfessorManagement/Migrations/20221202012059_migration.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
