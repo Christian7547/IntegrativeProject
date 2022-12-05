@@ -19,7 +19,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Area" class="control-label"></label>
-                <input asp-for="Area" class="form-control" />
+                <select asp-for="Area" class="form-control">
+                    <option value="Exact sciences">Exact sciences</option>
+                    <option value="Cognitive science">Cognitive science</option>
+                    <option value="Life science">Life science</option>
+                    <option value="Civil education">Civil education</option>
+                    <option value="Language study and learning">Language study and learning</option>
+                    <option value="Artistic education">Artistic education</option>
+                    <option value="Sports">Sports</option>
+                </select>
                 <span asp-validation-for="Area" class="text-danger"></span>
             </div>
             <div class="form-group">

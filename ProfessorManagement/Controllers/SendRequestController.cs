@@ -12,11 +12,6 @@ namespace ProfessorManagement.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Create()
         {
             return View();
