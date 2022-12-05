@@ -10,89 +10,85 @@ using ProfessorManagement.Models;
 
 namespace ProfessorManagement.Controllers
 {
-    public class ProfessorsController : Controller
+    public class GradesController : Controller
     {
         private readonly ProfessorContext _context;
 
-        public ProfessorsController(ProfessorContext context)
+        public GradesController(ProfessorContext context)
         {
             _context = context;
         }
 
-        // GET: Professors
+        // GET: Grades
         public async Task<IActionResult> Index()
         {
-            var query = _context.Professors.Where(p => p.RegisterType == 1);
-            return View(await query.ToListAsync());
+              return View(await _context.Grades.ToListAsync());
         }
 
-        // GET: Professors/Details/5
+        // GET: Grades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Professors == null)
+            if (id == null || _context.Grades == null)
             {
                 return NotFound();
             }
 
-            var professor = await _context.Professors
+            var grade = await _context.Grades
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (professor == null)
+            if (grade == null)
             {
                 return NotFound();
             }
 
-            return View(professor);
+            return View(grade);
         }
 
-        // GET: Professors/Create
+        // GET: Grades/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Professors/Create
+        // POST: Grades/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LastName,SecondLastName,CI,BirthDate,Phone,Address,RegisterDate,RegisterType,Status")] Professor professor)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Grade grade)
         {
-            professor.RegisterDate = DateTime.Today;
-            professor.RegisterType = 1;
-            professor.Status = 1;
             if (ModelState.IsValid)
             {
-                _context.Add(professor);
+                _context.Add(grade);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(professor);
+            return View(grade);
         }
 
-        // GET: Professors/Edit/5
+        // GET: Grades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Professors == null)
+            if (id == null || _context.Grades == null)
             {
                 return NotFound();
             }
 
-            var professor = await _context.Professors.FindAsync(id);
-            if (professor == null)
+            var grade = await _context.Grades.FindAsync(id);
+            if (grade == null)
             {
                 return NotFound();
             }
-            return View(professor);
+            return View(grade);
         }
 
-        // POST: Professors/Edit/5
+        // POST: Grades/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,SecondLastName,CI,BirthDate,Phone,Address,RegisterDate,RegisterType,Status")] Professor professor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Grade grade)
         {
-            if (id != professor.Id)
+            if (id != grade.Id)
             {
                 return NotFound();
             }
@@ -101,12 +97,12 @@ namespace ProfessorManagement.Controllers
             {
                 try
                 {
-                    _context.Update(professor);
+                    _context.Update(grade);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProfessorExists(professor.Id))
+                    if (!GradeExists(grade.Id))
                     {
                         return NotFound();
                     }
@@ -117,55 +113,49 @@ namespace ProfessorManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(professor);
+            return View(grade);
         }
 
-        // GET: Professors/Delete/5
+        // GET: Grades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Professors == null)
+            if (id == null || _context.Grades == null)
             {
                 return NotFound();
             }
 
-            var professor = await _context.Professors
+            var grade = await _context.Grades
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (professor == null)
+            if (grade == null)
             {
                 return NotFound();
             }
 
-            return View(professor);
+            return View(grade);
         }
 
-        // POST: Professors/Delete/5
+        // POST: Grades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Professors == null)
+            if (_context.Grades == null)
             {
-                return Problem("Entity set 'ProfessorContext.Professors'  is null.");
+                return Problem("Entity set 'ProfessorContext.Grades'  is null.");
             }
-            var professor = await _context.Professors.FindAsync(id);
-            if (professor != null)
+            var grade = await _context.Grades.FindAsync(id);
+            if (grade != null)
             {
-                _context.Professors.Remove(professor);
+                _context.Grades.Remove(grade);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProfessorExists(int id)
+        private bool GradeExists(int id)
         {
-          return _context.Professors.Any(e => e.Id == id);
-        }
-
-        public async Task<IActionResult> ShowRequests()
-        {
-            var query = _context.Professors.Where(p => p.RegisterType == 0);
-            return View(await query.ToListAsync());
+          return _context.Grades.Any(e => e.Id == id);
         }
     }
 }

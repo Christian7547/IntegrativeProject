@@ -272,8 +272,7 @@ namespace ProfessorManagement.Migrations
 
                     b.Property<string>("Area")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

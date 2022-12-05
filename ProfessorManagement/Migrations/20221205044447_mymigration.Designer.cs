@@ -12,8 +12,8 @@ using ProfessorManagement.Data;
 namespace ProfessorManagement.Migrations
 {
     [DbContext(typeof(ProfessorContext))]
-    [Migration("20221205013137_myMigration")]
-    partial class myMigration
+    [Migration("20221205044447_mymigration")]
+    partial class mymigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -274,8 +274,7 @@ namespace ProfessorManagement.Migrations
 
                     b.Property<string>("Area")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
