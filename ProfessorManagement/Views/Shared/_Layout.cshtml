@@ -58,6 +58,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Access" asp-action="LogOut">LogOut</a>
                         </li>
 
+
+                         @if (User.IsInRole("Director"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Subjects" asp-action="Index">Subject</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Director"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SendRequest" asp-action="Index">Subject</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -68,6 +68,7 @@ namespace ProfessorManagement.Controllers
         {
             userf.RoleID = 3;
             _context.Add(userf);
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -78,6 +79,14 @@ namespace ProfessorManagement.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Access");
+        }
+
+        public async Task CreateRole(int rol)
+        {
+            Role role = new Role();
+            role.RoleId = rol;
+            _context.Add(role);
+            await _context.SaveChangesAsync();
         }
     }
 }

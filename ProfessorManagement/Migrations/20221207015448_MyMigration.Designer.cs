@@ -12,8 +12,8 @@ using ProfessorManagement.Data;
 namespace ProfessorManagement.Migrations
 {
     [DbContext(typeof(ProfessorContext))]
-    [Migration("20221205044447_mymigration")]
-    partial class mymigration
+    [Migration("20221207015448_MyMigration")]
+    partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -294,6 +294,9 @@ namespace ProfessorManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
+                    b.Property<string>("ConfirmPassword")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(70)
@@ -311,6 +314,9 @@ namespace ProfessorManagement.Migrations
 
                     b.Property<int>("RoleID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Token_Recovery")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
