@@ -167,5 +167,6 @@ namespace ProfessorManagement.Controllers
             var query = _context.Professors.Where(p => p.RegisterType == 0);
             return View(await query.ToListAsync());
         }
+
     }
 }
