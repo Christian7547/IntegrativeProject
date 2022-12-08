@@ -9,7 +9,7 @@ namespace ProfessorManagement.Models
 
         [Required(ErrorMessage = "Gestion is required")]
         [StringLength(50, ErrorMessage = "{0} must be: minimun {2} and maximun {1}", MinimumLength = 3)]
-        [Display(Name = "Gestion")]
+        [Display(Name = "For gestion")]
         public string Gestion { get; set; } //gestion para la que está postulando
 
         [Required(ErrorMessage = "Degree is required")]
@@ -20,5 +20,6 @@ namespace ProfessorManagement.Models
         [StringLength(200, ErrorMessage = "{0} must be: minimun {2} and maximun {1}", MinimumLength = 3)]
         [Display(Name = "Comment")]
         public string? Comment { get; set; }
+        public List<Response>? Responses { get; set; }
     }
 }

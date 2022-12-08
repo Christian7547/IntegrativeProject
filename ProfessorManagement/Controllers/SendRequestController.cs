@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProfessorManagement.Data;
 using ProfessorManagement.Models;
 
@@ -19,7 +20,7 @@ namespace ProfessorManagement.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Send(SendRequest sendRequest)
-        {            
+        {
             Professor professor = new Professor();
             Request request = new Request();
             professor.Name= sendRequest.NamesProfessor;
@@ -39,9 +40,7 @@ namespace ProfessorManagement.Controllers
 
             await CreateProfessorByRequest(professor);
             await CreateRequest(request);
-            await TableProfessorRequest(professor.Id, request.Id);
-
-            //SendRequest send = sendRequest;
+            await TableProfessorRequest(professor.Id, request.Id, sendRequest.Specialty);
             return RedirectToAction("Index", "Home");
         }
 
@@ -63,12 +62,13 @@ namespace ProfessorManagement.Controllers
             }
         }
 
-        public async Task TableProfessorRequest(int idP, int r)
+        public async Task TableProfessorRequest(int idP, int r, string specialty)
         {
             Professor_Request professor_Request = new Professor_Request();  
             professor_Request.ProfessorId = idP;
             professor_Request.RequestId = r;
             professor_Request.NewStatus = 0;
+            professor_Request.Specialty = specialty;
             professor_Request.ChangeDate = DateTime.Today;   
             
             _context.Add(professor_Request);

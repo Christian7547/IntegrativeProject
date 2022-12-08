@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProfessorManagement.Migrations
 {
-    public partial class mymigration : Migration
+    public partial class myMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,6 +162,7 @@ namespace ProfessorManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ChangeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NewStatus = table.Column<byte>(type: "tinyint", nullable: false),
+                    Specialty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProfessorId = table.Column<int>(type: "int", nullable: false),
                     RequestId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -176,6 +177,27 @@ namespace ProfessorManagement.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProfessorsRequests_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Responses",
+                columns: table => new
+                {
+                    ResponseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    NewStatusRequest = table.Column<byte>(type: "tinyint", nullable: false),
+                    RequestId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Responses", x => x.ResponseId);
+                    table.ForeignKey(
+                        name: "FK_Responses_Requests_RequestId",
                         column: x => x.RequestId,
                         principalTable: "Requests",
                         principalColumn: "Id",
@@ -271,6 +293,11 @@ namespace ProfessorManagement.Migrations
                 column: "RequestId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Responses_RequestId",
+                table: "Responses",
+                column: "RequestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleID",
                 table: "Users",
                 column: "RoleID");
@@ -289,6 +316,9 @@ namespace ProfessorManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProfessorsRequests");
+
+            migrationBuilder.DropTable(
+                name: "Responses");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -1,44 +1,71 @@
-﻿@model IEnumerable<ProfessorManagement.Models.Professor_Subject>;
-@{
+﻿@{
     ViewData["Title"] = "List of assignments";
+    List<Professor> professors = (List<Professor>) ViewBag.Professors;
+    List<Subject> subjects = (List<Subject>) ViewBag.Subjects;
+    List<Grade> grades = (List<Grade>) ViewBag.Grades;
+    List<Professor_Grade> professor_Grades = (List<Professor_Grade>) ViewBag.PG;
+    List<Professor_Subject> professor_Subjects = (List<Professor_Subject>) ViewBag.PS;
+
+    var query = from p in professors
+                join pg in professor_Grades on p.Id equals pg.ProfessorId
+                join g in grades on pg.GradeId equals g.Id
+                join ps in professor_Subjects on p.Id equals ps.ProfessorId
+                join s in subjects on ps.SubjectId equals s.Id
+                select new
+                {
+                    NameProfessor = p.Name,
+                    LastName = p.LastName,
+                    SecondLastName = p.SecondLastName,
+                    NameSubject = s.Name,
+                    Area = s.Area,
+                    NameGrade = g.Name
+                };
 }
 
+<h2>Assignments</h2>
 <p>
-    <a asp-action="Assignments">Create New</a>
+    <a class="btn btn-outline-primary" asp-action="Assignments">Create New</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.professor)
+               Professor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.subject)
+                Subject
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.subject.Area)
+                Area
+            </th>
+            <th>
+                Grade
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in query)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.professor.Name)
+                    @item.NameProfessor
+                    @item.LastName
+                    @item.SecondLastName
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.subject.Name)
+                    @item.NameSubject
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.subject.Area)
+                    @item.Area
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @item.NameGrade
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="">Edit</a>
+                    <a asp-action="Delete" asp-route-id="">Delete</a>
                 </td>
             </tr>
         }

@@ -24,6 +24,11 @@ namespace ProfessorManagement.Models
         [Display(Name = "Birth Date")]
         public DateTime BirthDateProfessor { get; set; }
 
+
+        [Required(ErrorMessage = "Select a specialty")]
+        [Display(Name = "Specialty")]
+        public string Specialty { get; set; }
+
         [Required(ErrorMessage = "Phone is required")]
         [Display(Name = "Phone")]
         public int PhoneProfessor { get; set; }

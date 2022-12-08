@@ -1,0 +1,37 @@
+﻿@model ProfessorManagement.Models.Professor_Request
+@{
+    ViewData["Title"] = "Detail Request";
+}
+
+<div class ="col-md-4">
+    <h5>Response</h5>
+    <form method="post" action="Response">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <input asp-for="Professor.Id" name="professorId" class="for" type="hidden"/>
+            <input asp-for="Id" class="form-control" type="hidden"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Description</label>
+            <input name="description" placeholder="Enter a description" required class="form-control" />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <div>
+                <label for="status">Approve</label>
+                <input type="radio" class="form-check-input" name="newStatus" value="approve" />
+            </div>
+            <div>
+                <label for="status">Reject</label>
+                <input type="radio" class="form-check-input" name="newStatus" value="reject" />
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Send"/>
+        <a class="btn btn-outline-primary" asp-action="ShowRequests">Back to list</a>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

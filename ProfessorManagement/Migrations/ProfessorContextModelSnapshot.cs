@@ -185,6 +185,10 @@ namespace ProfessorManagement.Migrations
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Specialty")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfessorId");
@@ -242,6 +246,32 @@ namespace ProfessorManagement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("ProfessorManagement.Models.Response", b =>
+                {
+                    b.Property<int>("ResponseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResponseId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<byte>("NewStatusRequest")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ResponseId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("Responses");
                 });
 
             modelBuilder.Entity("ProfessorManagement.Models.Role", b =>
@@ -393,6 +423,17 @@ namespace ProfessorManagement.Migrations
                     b.Navigation("subject");
                 });
 
+            modelBuilder.Entity("ProfessorManagement.Models.Response", b =>
+                {
+                    b.HasOne("ProfessorManagement.Models.Request", "Request")
+                        .WithMany("Responses")
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Request");
+                });
+
             modelBuilder.Entity("ProfessorManagement.Models.User", b =>
                 {
                     b.HasOne("ProfessorManagement.Models.Role", "role")
@@ -402,6 +443,11 @@ namespace ProfessorManagement.Migrations
                         .IsRequired();
 
                     b.Navigation("role");
+                });
+
+            modelBuilder.Entity("ProfessorManagement.Models.Request", b =>
+                {
+                    b.Navigation("Responses");
                 });
 
             modelBuilder.Entity("ProfessorManagement.Models.Role", b =>

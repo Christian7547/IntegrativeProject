@@ -29,16 +29,16 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Professors" asp-action="Index">Professor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ListAssignments">Asignation</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Subjects" asp-action="Index">Subject</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Subjects" asp-action="Index">Subject</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ListAssignments">Assign subject</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="Index">Grade</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="Index">ProfessorGrade</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="S">ProfessorGrade</a>
                             </li>
 
                         }
@@ -46,12 +46,6 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="SendRequest" asp-action="Create">New Request</a>
-                            </li>
-                        }
-                        @if (User.IsInRole("Director"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SendRequest" asp-action="Index">Yerlin</a>
                             </li>
                         }
                         <li class="nav-item">
