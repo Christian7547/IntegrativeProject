@@ -170,6 +170,9 @@ namespace ProfessorManagement.Controllers
             return View(await query.ToListAsync());
         }
 
+<<<<<<< HEAD
+>>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
+=======
 >>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
     }
 }
