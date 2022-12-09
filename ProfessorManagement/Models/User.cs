@@ -20,8 +20,13 @@ namespace ProfessorManagement.Models
         [Required(ErrorMessage = "Password is required")]
         [StringLength(50, ErrorMessage = "{0} must be: minimum {2} and maximum {1}", MinimumLength = 3)]
         [Display(Name = "Password")]
-        public string Password { get; set; }  
-        
+        public string Password { get; set; }
+
+        [Compare("Password")]
+        public string? ConfirmPassword { get; set; }
+
+        public string? Token_Recovery { get; set; }
+
         public int RoleID { get; set; }
         public Role? role { get; set; }  
     }

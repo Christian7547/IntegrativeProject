@@ -28,9 +28,6 @@ namespace ProfessorManagement.Controllers
         {
             return View();
         }
-        public IActionResult PasswordRecovery()
-        {
-            return View();
-        }
+
     }
 }
