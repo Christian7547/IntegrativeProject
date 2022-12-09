@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using ProfessorManagement.Data;
 using ProfessorManagement.Models;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace ProfessorManagement.Controllers
 {
@@ -53,6 +56,9 @@ namespace ProfessorManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Response(int professorId, int Id, string description, string newStatus)
         {
+            string accountSid = "ACd0d33519805f452ac53c933e8b63e05f";
+            string authToken = "0c62a8f6f8c993465e5d6f9b1242bdd8";
+            string contentMessage = "Su solicitud ha sido aprobada, \nBienvenido a nuestra unidad educativa!";
             byte newStatusRequest;
             if(newStatus == "reject")
             {
@@ -73,6 +79,21 @@ namespace ProfessorManagement.Controllers
                                          .SingleOrDefault();
             professor.Status = newStatusRequest;
 
+            TwilioClient.Init(accountSid, authToken);
+
+            //var message = MessageResource.Create(
+            //    body: contentMessage,
+            //    from: new Twilio.Types.PhoneNumber("whatsapp: +12057362666"),
+            //    to: new Twilio.Types.PhoneNumber("whatsapp: +591 " + professor.Phone)
+            //);
+
+            var message = new CreateMessageOptions(new PhoneNumber("whatsapp:+591"+professor.Phone));
+            message.From = new PhoneNumber("whatsapp:+14155238886");
+            message.Body = contentMessage;
+            var sendMessage = MessageResource.Create(message);
+
+
+
             var professor_Request = (from pr in _context.ProfessorsRequests
                                                    where pr.Id == Id
                                                    select pr)
@@ -80,7 +101,7 @@ namespace ProfessorManagement.Controllers
             professor_Request.NewStatus = newStatusRequest;
 
             _context.Responses.Add(response);
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("ShowRequests", "Request");
         }
