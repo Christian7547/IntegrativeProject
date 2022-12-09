@@ -123,67 +123,6 @@ namespace ProfessorManagement.Controllers
             return View(await subjectContext.ToListAsync());
         }
 
-<<<<<<< HEAD
-=======
-        [HttpGet]
-        public async Task<IActionResult> Edit(int? id) 
-        {
-            if (id == null || _context.Professors_Subjects == null)
-            {
-                return NotFound();
-            }
-
-            var ps = await _context.Professors_Subjects.FindAsync(id);
-            if (ps == null)
-            {
-                return NotFound();
-            }
-            ViewData["ProfessorId"] = new SelectList(_context.Professors, "Id", "Name");
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Name");
-            return View(ps);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProfessorId,SubjectId")] Professor_Subject professor_subject)
-        {
-            ViewData["ProfessorId"] = new SelectList(_context.Professors_Subjects, "Id", "Name", professor_subject.ProfessorId);
-            ViewData["SubjectId"] = new SelectList(_context.Professors_Subjects, "Id", "Name", professor_subject.SubjectId);
-            if (id != professor_subject.Id)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                _context.Update(professor_subject);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!Professor_SubjectExists(professor_subject.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction("ListAssignments", "Asignation");
-        }
-        private bool Professor_SubjectExists(int id)
-        {
-            return _context.Professors.Any(e => e.Id == id);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ReportSearchProfessor()
-        {
-            var subjectContext = _context.Professors_Subjects.Include(s => s.subject).Include(p => p.professor);
-            return View(await subjectContext.ToListAsync());
-        }
-
->>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
         [HttpPost]
         public ViewResult ReportSearchProfessor(string searchString)
         {

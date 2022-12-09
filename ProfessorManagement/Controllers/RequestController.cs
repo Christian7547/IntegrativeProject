@@ -12,8 +12,6 @@ namespace ProfessorManagement.Controllers
     {
         private readonly ProfessorContext _context;
 
-        private int? Request_Id { get; set; }    
-
         public RequestController(ProfessorContext context)
         {
             _context = context;
@@ -80,12 +78,6 @@ namespace ProfessorManagement.Controllers
             professor.Status = newStatusRequest;
 
             TwilioClient.Init(accountSid, authToken);
-
-            //var message = MessageResource.Create(
-            //    body: contentMessage,
-            //    from: new Twilio.Types.PhoneNumber("whatsapp: +12057362666"),
-            //    to: new Twilio.Types.PhoneNumber("whatsapp: +591 " + professor.Phone)
-            //);
 
             var message = new CreateMessageOptions(new PhoneNumber("whatsapp:+591"+professor.Phone));
             message.From = new PhoneNumber("whatsapp:+14155238886");

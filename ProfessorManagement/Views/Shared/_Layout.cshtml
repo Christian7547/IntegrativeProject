@@ -38,28 +38,15 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="Index">Grade</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="S">ProfessorGrade</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ReportSearchProfessor">SearchProfessor</a>
                             </li>
-
                         }
                          @if (User.IsInRole("Solicitante"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="SendRequest" asp-action="Create">New Request</a>
                             </li>
-                        }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ReportSearchProfessor">SearchProfessor</a>
-                        </li>
->>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
-=======
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ReportSearchProfessor">SearchProfessor</a>
-                        </li>
->>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
+                        }                       
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Access" asp-action="LogOut">LogOut</a>
                         </li>

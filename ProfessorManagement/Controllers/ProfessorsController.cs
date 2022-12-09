@@ -161,18 +161,10 @@ namespace ProfessorManagement.Controllers
         {
           return _context.Professors.Any(e => e.Id == id);
         }
-<<<<<<< HEAD
-=======
-
         public async Task<IActionResult> ShowRequests()
         {
             var query = _context.Professors.Where(p => p.RegisterType == 0);
             return View(await query.ToListAsync());
         }
-
-<<<<<<< HEAD
->>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
-=======
->>>>>>> fbc853d42fe4d74b6556b6045fceb9e7a13e0b0b
     }
 }

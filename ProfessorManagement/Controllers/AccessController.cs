@@ -66,7 +66,7 @@ namespace ProfessorManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(User userf)
         {
-            userf.RoleID = 3;
+            userf.RoleID = 2;
             _context.Add(userf);
 
             await _context.SaveChangesAsync();
