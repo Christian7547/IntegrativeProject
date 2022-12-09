@@ -16,30 +16,53 @@ namespace ProfessorManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Professor_Subject professorSubjectModel)
+        public async Task<IActionResult> Create(int gradeId, int professorId, int subjectId)
         {
-            ViewData["ProfessorId"] = new SelectList(_context.Professors, "Id", "Name", professorSubjectModel.ProfessorId);
-            ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Name", professorSubjectModel.SubjectId);
+            Professor_Subject professor_Subject = new Professor_Subject() 
+            { 
+                ProfessorId = professorId,
+                SubjectId = subjectId
+            };
+            
 
-            _context.Add(professorSubjectModel);
+            Professor_Grade professor_Grade = new Professor_Grade()
+            {
+                ProfessorId = professorId,
+                GradeId = gradeId
+            };           
+
+            _context.Professors_Subjects.Add(professor_Subject);
+            _context.Professor_Grades.Add(professor_Grade);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("ListAssignments", "Asignation");
         }
 
         [HttpGet]
-        public IActionResult Assignments()
+        public async Task<IActionResult> Assignments()
         {
-            ViewData["ProfessorId"] = new SelectList(_context.Professors, "Id", "Name");
+            ViewData["ProfessorId"] = new SelectList(_context.Professors.Where(p => p.Status == 1), "Id", "Name");
             ViewData["SubjectId"] = new SelectList(_context.Subjects, "Id", "Name");
+            List<Grade> grades = await _context.Grades.ToListAsync();
+            ViewData["GradeId"] = grades;
 
             return View();
         }
 
         public async Task<IActionResult> ListAssignments()
         {
-            var subjectContext = _context.Professors_Subjects.Include(s => s.subject).Include(p => p.professor);
-            return View(await subjectContext.ToListAsync());
+            List<Professor> professors = await _context.Professors.ToListAsync();
+            List<Subject> subjects = await _context.Subjects.ToListAsync();
+            List<Grade> grades = await _context.Grades.ToListAsync();
+            List<Professor_Subject> professor_Subjects = await _context.Professors_Subjects.ToListAsync();
+            List<Professor_Grade> professor_Grades = await _context.Professor_Grades.ToListAsync();
+
+            ViewBag.Professors = professors;
+            ViewBag.Subjects = subjects;
+            ViewBag.Grades = grades;
+            ViewBag.PG = professor_Grades;
+            ViewBag.PS = professor_Subjects;
+            return View();
         }
 
         [HttpGet]

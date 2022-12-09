@@ -22,7 +22,7 @@ namespace ProfessorManagement.Controllers
         // GET: Professors
         public async Task<IActionResult> Index()
         {
-            var query = _context.Professors.Where(p => p.RegisterType == 1);
+            var query = _context.Professors.Where(p=> p.Status == 1);
             return View(await query.ToListAsync());
         }
 
@@ -161,12 +161,10 @@ namespace ProfessorManagement.Controllers
         {
           return _context.Professors.Any(e => e.Id == id);
         }
-
         public async Task<IActionResult> ShowRequests()
         {
             var query = _context.Professors.Where(p => p.RegisterType == 0);
             return View(await query.ToListAsync());
         }
-
     }
 }
