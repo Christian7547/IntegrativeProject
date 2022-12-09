@@ -53,10 +53,6 @@ namespace ProfessorManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Response(int professorId, int Id, string description, string newStatus)
         {
-            if(description == null)
-            {
-                ViewBag.IsNull = "Please enter a description for the answer";
-            }
             byte newStatusRequest;
             if(newStatus == "reject")
             {
