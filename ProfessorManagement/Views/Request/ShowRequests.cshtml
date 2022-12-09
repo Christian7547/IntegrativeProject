@@ -17,13 +17,13 @@
                 @Html.DisplayNameFor(model => model.Professor.CI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Professor.BirthDate)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Professor.Phone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Professor.Address)
+                @Html.DisplayNameFor(model => model.Request.Degree)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request.Gestion)
             </th>
             <th></th>
         </tr>
@@ -41,13 +41,13 @@
                     @Html.DisplayFor(modelItem => item.Professor.CI)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Professor.BirthDate)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Professor.Phone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Professor.Address)
+                    @Html.DisplayFor(modelItem => item.Request.Degree)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Request.Gestion)
                 </td>
                 <td>
                     <a class="btn btn-outline-info" asp-action="DetailsRequest" asp-route-id="@item.Id">Details</a>

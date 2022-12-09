@@ -42,10 +42,11 @@ namespace ProfessorManagement.Models
 
         [Required(ErrorMessage = "RegisterDate date is requeride")]
         [DataType(DataType.Date)]
+        [Display(Name = "Register Date:")]
         public DateTime RegisterDate { get; set; }
 
         [Required(ErrorMessage = "RegisterType is required")]
-        [Display(Name = "RegisterType")]
+        [Display(Name = "Register Type:")]
         public byte RegisterType { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
