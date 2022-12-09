@@ -10,19 +10,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="~/css/style.css">
-  <title>Formulario Registro</title>
+  <title>Login</title>
 </head>
 <body>
   <section class="form-register">
-     <h4>Iniciar Sesión</h4>
+     <h4>Login</h4>
         <form asp-action="Index">
-            <input class="controls" type="email" placeholder="Ingrese su Correo" asp-for="Email">
-            <input class="controls" type="password" placeholder="Ingrese su Contraseña" asp-for="Password">
-            <input class="botons" type="submit">
-            <p><a asp-controller="Access" asp-action="Create">¿Quiero Registrarme?</a></p>
+            <input class="controls" type="email" placeholder="Enter your Email" asp-for="Email">
+            <input class="controls" type="password" placeholder="Enter your Password" asp-for="Password">
+            <input class="controls" type="number" value="@ViewBag.verCode" name="codigo" readonly>
+            
+            <input class="controls" type="number" placeholder="Enter your Code" name="code">
+            
+            <input class="botons" type="submit" value="Login">
+            <p><a asp-controller="Access" asp-action="Create">Register Me</a></p>
 
-            <p><a asp-controller="Recovery" asp-action="StartRecovery">¿Olvidé Mi Contraseña?</a></p>
-         </form> 
+            <p><a asp-controller="Recovery" asp-action="StartRecovery">Forgot my password</a></p>
+         </form>
     </section>
 </body>
 </html>

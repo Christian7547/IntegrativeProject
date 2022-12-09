@@ -157,5 +157,25 @@ namespace ProfessorManagement.Controllers
         {
           return _context.Subjects.Any(e => e.Id == id);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ReportSearchSubject()
+        {
+            var subjectContext = _context.Professors_Subjects.Include(s => s.subject).Include(p => p.professor);
+            return View(await subjectContext.ToListAsync());
+        }
+
+        [HttpPost]
+        public ViewResult ReportSearchSubject(string searchString)
+        {
+            var query = from p in _context.Professors_Subjects.Include(s => s.subject).Include(p => p.professor)
+                        select p;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(s => s.subject.Name.Contains(searchString)
+                                || s.subject.Area.Contains(searchString));
+            }
+            return View(query.ToList());
+        }
     }
 }

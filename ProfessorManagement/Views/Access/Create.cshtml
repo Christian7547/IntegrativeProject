@@ -9,18 +9,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="~/css/style.css">
-  <title>Formulario Registro</title>
+  <title>REGISTER</title>
 </head>
 <body>
   <section class="form-register">
-    <h4>Formulario Registro</h4>
+    <h4>Register</h4>
      <form asp-action="Create">
-         <input class="controls" type="text" placeholder="Ingrese su Nombre" asp-for="Name">
-         <input class="controls" type="email" placeholder="Ingrese su Correo" asp-for="Email">
-         <input class="controls" type="password" placeholder="Ingrese su Contraseña" asp-for="Password">
+         <input class="controls" type="text" placeholder="Enter your Name" asp-for="Name">
+         <input class="controls" type="email" placeholder="Enter your Email" asp-for="Email">
+         <input class="controls" type="password" placeholder="Enter your Password" asp-for="Password">
          <input class="botons" type="submit" value="Register">
-         <p><a asp-controller="Access" asp-action="Index">¿Ya tengo Cuenta?</a></p>
-         <p><a asp-controller="Home" asp-action="PasswordRecovery">¿Olvidé Mi Contraseña?</a></p>
+         <p><a asp-controller="Access" asp-action="Index">Login</a></p>
+         <p><a asp-controller="Home" asp-action="PasswordRecovery">Forgot my password</a></p>
       </form> 
   </section>
 

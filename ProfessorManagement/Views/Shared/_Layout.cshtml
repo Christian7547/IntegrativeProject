@@ -38,19 +38,24 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="Index">Grade</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="Index">ProfessorGrade</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ReportSearchProfessor">SearchProfessor</a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Subjects" asp-action="ReportSearchSubject">SearchSubjectProfessor</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="ReportSearchGrade">SearchGradeProfessor</a>
+                            </li>
                         }
-                         @if (User.IsInRole("Solicitante"))
+                         @if (User.IsInRole("Applicant"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="SendRequest" asp-action="Create">New Request</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asignation" asp-action="ReportSearchProfessor">SearchProfessor</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Access" asp-action="LogOut">LogOut</a>
                         </li>

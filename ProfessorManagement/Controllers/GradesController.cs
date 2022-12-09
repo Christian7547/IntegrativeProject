@@ -157,5 +157,25 @@ namespace ProfessorManagement.Controllers
         {
           return _context.Grades.Any(e => e.Id == id);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ReportSearchGrade()
+        {
+            var gradeContext = _context.Professor_Grades.Include(g => g.grade).Include(p => p.professor);
+            return View(await gradeContext.ToListAsync());
+        }
+
+        [HttpPost]
+        public ViewResult ReportSearchGrade(string searchString)
+        {
+            var query = from p in _context.Professor_Grades.Include(g => g.grade).Include(p => p.professor)
+                        select p;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(g => g.grade.Name.Contains(searchString));
+
+            }
+            return View(query.ToList());
+        }
     }
 }

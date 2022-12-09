@@ -9,6 +9,7 @@ namespace ProfessorManagement.Controllers
 {
     public class AccessController : Controller
     {
+        Random random = new Random();
         private readonly ProfessorContext _context;
         public AccessController(ProfessorContext context)
         {
@@ -17,11 +18,12 @@ namespace ProfessorManagement.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.verCode = random.Next(100000, 999999).ToString();
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(string email, string password)
+        public async Task<IActionResult> Index(string email, string password, string code, string codigo)
         {
             var userLogin = from usr in _context.Users
                             join rolesX in _context.Roles
@@ -49,7 +51,16 @@ namespace ProfessorManagement.Controllers
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                return RedirectToAction("Index", "Home");
+                if (code == codigo)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.verCode = random.Next(100000, 999999).ToString();
+                    return RedirectToAction("Index", "Access");
+                }
+                return View();
             }
             else
             {
@@ -88,5 +99,7 @@ namespace ProfessorManagement.Controllers
             _context.Add(role);
             await _context.SaveChangesAsync();
         }
+
+
     }
 }
