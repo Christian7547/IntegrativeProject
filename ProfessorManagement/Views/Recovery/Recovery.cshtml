@@ -1,0 +1,32 @@
+﻿@model User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="~/css/style.css">
+      <title>Recovery Password</title>
+    </head>
+
+    <body>
+      <form action="@Url.Content("~/Recovery/Recovery")" method="post">
+          @Html.HiddenFor(d =>d.Token_Recovery)
+          <input type="text" value="@Model.Token_Recovery" name="token" hidden/> 
+          <label>New Password</label>
+          @Html.PasswordFor(d=> d.Password ,new{ @class="form-control"})
+          @Html.ValidationMessageFor(d=> d.Password,null, new {style="color:red"})
+          <br />
+          <label>Confirm your Password</label>
+          @Html.PasswordFor(d=> d.ConfirmPassword, new{ @class="form-control"})
+          @Html.ValidationMessageFor(d=> d.ConfirmPassword,null, new {style="color:red"})
+          
+          <div class="form-text">
+              <button class="btn btn-primary">Reset</button>
+          </div>
+      </form>
+    </body>
+</html>
