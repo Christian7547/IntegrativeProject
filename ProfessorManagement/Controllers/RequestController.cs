@@ -64,24 +64,30 @@ namespace ProfessorManagement.Controllers
                              where p.Id == professorId
                              select p).SingleOrDefault();
 
+            var professor_Request = (from pr in _context.ProfessorsRequests
+                                     where pr.Id == Id
+                                     select pr).SingleOrDefault();
+
             TwilioClient.Init(accountSid, authToken);
+
+            var message = new CreateMessageOptions(new PhoneNumber("whatsapp:+591" + professor.Phone));
+            message.From = new PhoneNumber("whatsapp:+14155238886");
+
             if (newStatus == "reject")
             {
                 newStatusRequest = 2;
                 professor.Status = newStatusRequest;
+                professor_Request.NewStatus = newStatusRequest;
 
-                var messageAprove = new CreateMessageOptions(new PhoneNumber("whatsapp:+591" + professor.Phone));
-                messageAprove.From = new PhoneNumber("whatsapp:+14155238886");
-                messageAprove.Body = contentMessageR;
-                var sendMessageAprove = MessageResource.Create(messageAprove);
+                message.Body = contentMessageR;
+                var sendMessageAprove = MessageResource.Create(message);
             }
             else
             {
                 newStatusRequest = 1;
                 professor.Status = newStatusRequest;
+                professor_Request.NewStatus = newStatusRequest;
 
-                var message = new CreateMessageOptions(new PhoneNumber("whatsapp:+591" + professor.Phone));
-                message.From = new PhoneNumber("whatsapp:+14155238886");
                 message.Body = contentMessageA;
                 var sendMessage = MessageResource.Create(message);
 
@@ -93,13 +99,6 @@ namespace ProfessorManagement.Controllers
                 NewStatusRequest= newStatusRequest,
                 RequestId= Id   
             };
-
-
-            var professor_Request = (from pr in _context.ProfessorsRequests
-                                                   where pr.Id == Id
-                                                   select pr)
-                                                .SingleOrDefault(); ;
-            professor_Request.NewStatus = newStatusRequest;
 
             _context.Responses.Add(response);
             await _context.SaveChangesAsync();

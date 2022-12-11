@@ -1,7 +1,9 @@
 ﻿@model ProfessorManagement.Models.Professor_Request
 @{
     ViewData["Title"] = "Detail Request";
-    string status = "Pending";
+    string pending = "Pending";
+    string rejected = "Rejected";
+    string comment = "No comment";
 }
 
 <div>
@@ -24,9 +26,12 @@
         <dd class="col-sm-10">
             @if(Model.NewStatus == 0)
             {
-                <label>@status</label>
+                @pending
             }
-            <label>Rejected</label>
+            @if(Model.NewStatus == 2)
+            {
+                @rejected
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Professor.Name)
