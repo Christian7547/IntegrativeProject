@@ -4,9 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Request</h2>
-
-<a class="btn btn-outline-primary" asp-action="RejectRequest">Show RejectRequest</a>
+<h2>Applications rejected</h2>
 <table class="table">
     <thead>
         <tr>
@@ -51,10 +49,10 @@
                 </td>
                 <td>
                     <a class="btn btn-outline-info" asp-action="DetailsRequest" asp-route-id="@item.Id">Details</a>
-                    <a class="btn btn-info" asp-action="Response" asp-route-id="@item.Id">Response</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a class="btn btn-primary" asp-controller="Professors" asp-action="Index">Back</a>
+<a class="btn btn-primary" asp-action="ShowRequests">Back</a>
+

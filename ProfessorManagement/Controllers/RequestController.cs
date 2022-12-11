@@ -56,13 +56,36 @@ namespace ProfessorManagement.Controllers
         {
             string accountSid = "ACd0d33519805f452ac53c933e8b63e05f";
             string authToken = "0c62a8f6f8c993465e5d6f9b1242bdd8";
-            string contentMessage = "Su solicitud ha sido aprobada, \nBienvenido a nuestra unidad educativa!";
+            string contentMessageA = "Su solicitud ha sido aprobada, \nBienvenido a nuestra unidad educativa!";
+            string contentMessageR = "Su solicitud ha sido rechazada, \nPara consultas acérquese a nuestras instalaciones";
             byte newStatusRequest;
-            if(newStatus == "reject")
+
+            var professor = (from p in _context.Professors
+                             where p.Id == professorId
+                             select p).SingleOrDefault();
+
+            TwilioClient.Init(accountSid, authToken);
+            if (newStatus == "reject")
             {
                 newStatusRequest = 2;
+                professor.Status = newStatusRequest;
+
+                var messageAprove = new CreateMessageOptions(new PhoneNumber("whatsapp:+591" + professor.Phone));
+                messageAprove.From = new PhoneNumber("whatsapp:+14155238886");
+                messageAprove.Body = contentMessageR;
+                var sendMessageAprove = MessageResource.Create(messageAprove);
             }
-            newStatusRequest = 1;
+            else
+            {
+                newStatusRequest = 1;
+                professor.Status = newStatusRequest;
+
+                var message = new CreateMessageOptions(new PhoneNumber("whatsapp:+591" + professor.Phone));
+                message.From = new PhoneNumber("whatsapp:+14155238886");
+                message.Body = contentMessageA;
+                var sendMessage = MessageResource.Create(message);
+
+            }
 
             Response response = new Response()
             {
@@ -70,20 +93,6 @@ namespace ProfessorManagement.Controllers
                 NewStatusRequest= newStatusRequest,
                 RequestId= Id   
             };
-
-
-            var professor = (from p in _context.Professors
-                                         where p.Id == professorId select p)
-                                         .SingleOrDefault();
-            professor.Status = newStatusRequest;
-
-            TwilioClient.Init(accountSid, authToken);
-
-            var message = new CreateMessageOptions(new PhoneNumber("whatsapp:+591"+professor.Phone));
-            message.From = new PhoneNumber("whatsapp:+14155238886");
-            message.Body = contentMessage;
-            var sendMessage = MessageResource.Create(message);
-
 
 
             var professor_Request = (from pr in _context.ProfessorsRequests
@@ -96,6 +105,14 @@ namespace ProfessorManagement.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("ShowRequests", "Request");
+        }
+
+        public async Task<IActionResult> RejectRequest()
+        {
+            var query = _context.ProfessorsRequests.Include(p => p.Professor)
+                .Include(r => r.Request)
+                .Where(p => p.NewStatus == 2);
+            return View(await query.ToArrayAsync());
         }
     }
 }
