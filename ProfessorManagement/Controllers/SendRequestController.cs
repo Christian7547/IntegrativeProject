@@ -48,7 +48,7 @@ namespace ProfessorManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(request);
+                _context.Requests.Add(request);
                 await _context.SaveChangesAsync();
             }
         }
@@ -57,7 +57,7 @@ namespace ProfessorManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(professor);
+                _context.Professors.Add(professor);
                 await _context.SaveChangesAsync();
             }
         }
@@ -71,7 +71,7 @@ namespace ProfessorManagement.Controllers
             professor_Request.Specialty = specialty;
             professor_Request.ChangeDate = DateTime.Today;   
             
-            _context.Add(professor_Request);
+            _context.ProfessorsRequests.Add(professor_Request);
             await _context.SaveChangesAsync();
         }
     }
